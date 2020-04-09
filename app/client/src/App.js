@@ -2,11 +2,8 @@ import React from 'react';
 import './App.css';
 import TimeInterval from './components/inputs/timeInterval'
 
-let currentInterval = 0;
 let restMinutes = 0;
 let restSeconds = 0;
-let workMinutes = 0;
-let workSeconds = 0;
 
 function App() {
   return (

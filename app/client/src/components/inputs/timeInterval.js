@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 
-const TimeInterval = ({id}) => {
+const styles = {
+  timeInterval: {
+    width: '100%',
+    '& input': {
+      width: '15%',
+      display: 'inline',
+      margin: '2rem'
+    },
+    '& p': {
+      display: 'inline',
+    }
+  }
+};
+
+const TimeInterval = ({id, classes}) => {
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
 
@@ -13,21 +28,23 @@ const TimeInterval = ({id}) => {
     }
   };
 
-  return <div id={id} className="timeInterval">
+  return <div id={id} className={classes.timeInterval}>
     <input
       type="number"
       name="minutes"
       onChange={onTimeChange(setMinutes)}
       value={minutes || ''}
-    /><p>m</p>
+    />
+    <p>m</p>
 
     <input
       type="number"
       name="seconds"
       onChange={onTimeChange(setSeconds)}
       value={seconds || ''}
-    /><p>sec</p>
+    />
+    <p>sec</p>
   </div>
 };
 
-export default TimeInterval;
+export default withStyles(styles)(TimeInterval);
