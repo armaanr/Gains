@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -15,33 +15,21 @@ const styles = {
   }
 };
 
-const TimeInterval = ({id, classes}) => {
-  const [minutes, setMinutes] = useState();
-  const [seconds, setSeconds] = useState();
-
-  const onTimeChange = (setValue) => (e) => {
-    const regex = /^[0-9]$|^[0-5][0-9]$/;
-    const value = e.target.value;
-
-    if( (value === '') || (value.match(regex))){
-      setValue(value);
-    }
-  };
-
+const TimeInterval = ({id, classes, minutes='', seconds='', onMinuteChange, onSecondChange}) => {
   return <div id={id} className={classes.timeInterval}>
     <input
       type="number"
       name="minutes"
-      onChange={onTimeChange(setMinutes)}
-      value={minutes || ''}
+      onChange={onMinuteChange}
+      value={minutes}
     />
     <p>m</p>
 
     <input
       type="number"
       name="seconds"
-      onChange={onTimeChange(setSeconds)}
-      value={seconds || ''}
+      onChange={onSecondChange}
+      value={seconds}
     />
     <p>sec</p>
   </div>
