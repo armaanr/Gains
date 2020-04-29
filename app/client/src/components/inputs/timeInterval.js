@@ -15,12 +15,22 @@ const styles = {
   }
 };
 
-const TimeInterval = ({id, classes, minutes='', seconds='', onMinuteChange, onSecondChange}) => {
+const TimeInterval = ({
+  id,
+  classes,
+  minutes='',
+  seconds='',
+  onMinuteChange,
+  onSecondChange,
+  onMinuteBlur,
+  onSecondBlur,
+}) => {
   return <div id={id} className={classes.timeInterval}>
     <input
       type="number"
       name="minutes"
       onChange={onMinuteChange}
+      onBlur={onMinuteBlur}
       value={minutes}
     />
     <p>m</p>
@@ -29,6 +39,7 @@ const TimeInterval = ({id, classes, minutes='', seconds='', onMinuteChange, onSe
       type="number"
       name="seconds"
       onChange={onSecondChange}
+      onBlur={onSecondBlur}
       value={seconds}
     />
     <p>sec</p>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TimeInterval from './inputs/timeInterval';
+import TimerDisplay from './timerDisplay';
 import { withStyles } from '@material-ui/core/styles';
 
 const DEFAULT_INTERVAL = {min: 0, sec: 0};
@@ -13,14 +14,25 @@ const styles = {
 const Timer = ({classes}) => {
   const [restInterval, setRestInterval] = useState(DEFAULT_INTERVAL);
   const [workInterval, setWorkInterval] = useState(DEFAULT_INTERVAL);
+  const [startTimer, setStartTimer] = useState(false);
 
   const onTimeChange = (interval, setInterval, keyToSet) => (e) => {
     let newInterval = { ...interval };
-    let regex = /^[0-9]$|^[0-5][0-9]$/;
+    let regex = /^[0-9]$|^[0-5][0-9]$|^$/;
     let value = e.target.value;
 
-    if( (value === '') || (value.match(regex))){
+    if(value.match(regex)){
       newInterval[keyToSet] = value;
+      setInterval(newInterval);
+    }
+  };
+
+  const onBlur = (interval, setInterval, keyToSet) => (e) => {
+    let newInterval = { ...interval };
+    let value = e.target.value;
+
+    if(value.length === 0){
+      newInterval[keyToSet] = 0;
       setInterval(newInterval);
     }
   };
@@ -35,6 +47,8 @@ const Timer = ({classes}) => {
           seconds: restInterval['sec'],
           onMinuteChange: onTimeChange(restInterval, setRestInterval, 'min' ),
           onSecondChange: onTimeChange(restInterval, setRestInterval, 'sec' ),
+          onMinuteBlur: onBlur(restInterval, setRestInterval, 'min'),
+          onSecondBlur: onBlur(restInterval, setRestInterval, 'sec')
         }}/>
       </div>
       <div className={classes.intervals}>
@@ -45,19 +59,21 @@ const Timer = ({classes}) => {
           seconds: workInterval['sec'],
           onMinuteChange: onTimeChange(workInterval, setWorkInterval, 'min' ),
           onSecondChange: onTimeChange(workInterval, setWorkInterval, 'sec' ),
+          onMinuteBlur: onBlur(restInterval, setWorkInterval, 'min'),
+          onSecondBlur: onBlur(restInterval, setWorkInterval, 'sec')
         }}/>
       </div>
       <div>
-        {displayClock({})}
+        {startTimer ? <TimerDisplay {...{
+          restInterval: restInterval,
+          workInterval: workInterval
+        }}/> : ''}
       </div>
-      <button onClick={setInterval}>Start</button>
+      <button onClick={() => {setStartTimer(!startTimer)}}>
+        {startTimer ? 'Start' : 'Stop'}
+      </button>
     </div>
   )
 };
-
-const displayClock = () => {
-  return <h1>{`${0}:${0}`}</h1>
-};
-
 
 export default withStyles(styles)(Timer)
