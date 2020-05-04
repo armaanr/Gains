@@ -9,3 +9,12 @@
 (1..5).each do |i|
   User.create(first_name: "User#{i}", last_name: 'Rai', email: "email#{1}@bobo.com")
 end
+
+Exercise.create(name: 'Pushups')
+Exercise.create(name: 'Shrugs')
+Exercise.create(name: 'Pullups')
+Workout.create(name: 'Get Swole')
+ExerciseSet.create(reps: 1, order: 1, rest_interval_seconds: 5, work_interval_seconds: 10, exercise_id: 1, workout_id: 1)
+ExerciseSet.create(reps: 1, order: 1, rest_interval_seconds: 3, work_interval_seconds: 7, exercise_id: 2, workout_id: 1)
+ExerciseSet.create(reps: 1, order: 1, rest_interval_seconds: 6, work_interval_seconds: 7, exercise_id: 3, workout_id: 1)
+
