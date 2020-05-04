@@ -14,6 +14,7 @@ const styles = {
 const Timer = ({classes}) => {
   const [restInterval, setRestInterval] = useState(DEFAULT_INTERVAL);
   const [workInterval, setWorkInterval] = useState(DEFAULT_INTERVAL);
+  const [numberOfSets, setNumberOfSets] = useState(1);
   const [startTimer, setStartTimer] = useState(false);
 
   const onTimeChange = (interval, setInterval, keyToSet) => (e) => {
@@ -64,9 +65,18 @@ const Timer = ({classes}) => {
         }}/>
       </div>
       <div>
+        <h2>Sets:</h2>
+        <input
+          type="number"
+          name="minutes"
+          onChange={(e) => {if(e.target.value > 0) setNumberOfSets(e.target.value)}}
+        />
+      </div>
+      <div>
         {startTimer ? <TimerDisplay {...{
           restInterval: restInterval,
-          workInterval: workInterval
+          workInterval: workInterval,
+          numberOfSets: numberOfSets
         }}/> : ''}
       </div>
       <button onClick={() => {setStartTimer(!startTimer)}}>

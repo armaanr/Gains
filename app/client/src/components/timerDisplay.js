@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from 'react';
 
-const TimerDisplay = ({restInterval, workInterval}) => {
-  const workoutIntervals = [workInterval, restInterval];
+const TimerDisplay = ({restInterval, workInterval, numberOfSets}) => {
+  const workoutIntervals = {
+    work: workInterval,
+    rest: restInterval
+  };
 
-  const [currentInterval, setCurrentInterval] = useState(0);
+  const [currentInterval, setCurrentInterval] = useState('work');
   const [currentMin, setCurrentMin] = useState(workoutIntervals[currentInterval]['min']);
   const [currentSec, setCurrentSec] = useState(workoutIntervals[currentInterval]['sec']);
+  const [currentSets, setCurrentSets] = useState(numberOfSets);
   const [timerOn, setTimerOn] = useState(false);
 
   useEffect(() => {
     let runTimer = null;
-    if(timerOn) {
+    if(timerOn && currentSets > 0) {
       if (currentMin > 0 || currentSec > 0) {
         runTimer = setInterval(() => {
           if (currentSec === 0) {
@@ -24,9 +28,16 @@ const TimerDisplay = ({restInterval, workInterval}) => {
           }
         }, 1000);
       } else {
-        let newInterval = (currentInterval + 1) % 2;
-        setCurrentMin(workoutIntervals[currentInterval]['min']);
-        setCurrentSec(workoutIntervals[currentInterval]['sec']);
+        let newInterval = (currentInterval === 'work') ? 'rest' : 'work';
+        setCurrentMin(workoutIntervals[newInterval]['min']);
+        setCurrentSec(workoutIntervals[newInterval]['sec']);
+        if (currentInterval === 'rest') {
+          setCurrentSets(currentSets - 1);
+          if (currentSets === 1) {
+            setCurrentMin(0);
+            setCurrentSec(0);
+          }
+        }
         setCurrentInterval(newInterval);
       }
     }
