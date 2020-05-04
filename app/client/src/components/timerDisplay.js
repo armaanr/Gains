@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const TimerDistimerOn = ({restInterval, workInterval}) => {
+const TimerDisplay = ({restInterval, workInterval}) => {
   const workoutIntervals = [workInterval, restInterval];
 
   const [currentInterval, setCurrentInterval] = useState(0);
@@ -9,7 +9,7 @@ const TimerDistimerOn = ({restInterval, workInterval}) => {
   const [timerOn, setTimerOn] = useState(false);
 
   useEffect(() => {
-    let runTimer = null ;
+    let runTimer = null;
     if(timerOn) {
       if (currentMin > 0 || currentSec > 0) {
         runTimer = setInterval(() => {
@@ -50,4 +50,4 @@ const TimerDistimerOn = ({restInterval, workInterval}) => {
   </div>
 };
 
-export default TimerDistimerOn;
+export default TimerDisplay;
