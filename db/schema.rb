@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2020_05_04_010649) do
   enable_extension "plpgsql"
 
   create_table "exercise_sets", force: :cascade do |t|
-    t.integer "reps"
+    t.integer "reps", default: 1, null: false
     t.integer "order"
     t.integer "rest_interval_seconds", null: false
     t.integer "work_interval_seconds", null: false
     t.bigint "exercise_id", null: false
-    t.bigint "workout_id"
+    t.bigint "workout_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exercise_id"], name: "index_exercise_sets_on_exercise_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_010649) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_exercises_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_010649) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_workouts_on_name", unique: true
   end
 
 end
