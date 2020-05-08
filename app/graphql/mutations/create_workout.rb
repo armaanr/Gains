@@ -6,8 +6,8 @@ module Mutations
     # return type from the mutation
     field :workout, Types::WorkoutType, null: false
 
-    def resolve(name: nil)
-      workout = Workout.create(name: name)
+    def resolve(**args)
+      workout = Workout.create(**args)
       { workout: workout }
     end
   end
