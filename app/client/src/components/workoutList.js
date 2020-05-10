@@ -16,11 +16,17 @@ const GET_WORKOUTS = gql`
 `;
 
 const styles = {
+  workoutList: {
+    display: 'flex',
+    flexFlow: 'column',
+  },
   list: {
+    width: '100%',
     listStyle: 'none',
   },
-  workoutList: {
+  heading: {
     width: '100%',
+
   },
 };
 
@@ -31,6 +37,7 @@ const WorkoutList = ({classes}) => {
   if (error) return `Error! ${error.message}`;
 
   return <div className={classes.workoutList}>
+    <h2 className={classes.heading}>Workouts</h2>
     <ul className={classes.list}>
       {
         data && data['workouts'].map((workout, i) => {

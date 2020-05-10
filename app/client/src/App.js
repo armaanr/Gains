@@ -1,18 +1,14 @@
 import React from 'react';
 import './App.css';
-import Timer from './components/timer'
-import WorkoutList from './components/workoutList';
-import ExerciseList from './components/exerciseList';
+import Main from './components/pages/main';
 
 function App() {
   return (
     <div className="App">
       <header>
-        <h1>Time</h1>
+        <h1>Gains</h1>
       </header>
-      <ExerciseList/>
-      <WorkoutList/>
-      <Timer/>
+      <Main/>
     </div>
   );
 }
