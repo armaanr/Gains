@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
 import { useQuery } from '@apollo/react-hooks';
+import { Link } from 'react-router-dom';
 
 const GET_WORKOUTS = gql`
   {
@@ -24,6 +25,20 @@ const styles = {
     width: '100%',
     listStyle: 'none',
   },
+  listItem: {
+    width: '100%',
+    borderStyle: 'outset',
+    padding: '0.5rem',
+    margin: '0.5rem',
+    '&:hover': {
+      borderStyle: 'inset',
+    },
+  },
+  link: {
+    display: 'block',
+    width: '100%',
+    textDecoration: 'none',
+  },
   heading: {
     width: '100%',
 
@@ -41,7 +56,11 @@ const WorkoutList = ({classes}) => {
     <ul className={classes.list}>
       {
         data && data['workouts'].map((workout, i) => {
-          return <li key={`workout-${i}`}>{workout.name}</li>
+          return <li className={classes.listItem} key={`workout-${i}`}>
+            <Link className={classes.link} to={`/workout/${workout.id}`}>
+              {workout.name}
+            </Link>
+          </li>
         })
       }
     </ul>
