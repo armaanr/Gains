@@ -1,7 +1,6 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, gql } from '@apollo/client';
 
 const GET_EXERCISES = gql`
   {

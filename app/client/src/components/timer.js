@@ -3,7 +3,7 @@ import TimeInterval from './inputs/timeInterval';
 import TimerDisplay from './timerDisplay';
 import { withStyles } from '@material-ui/core/styles';
 
-const DEFAULT_INTERVAL = {min: 0, sec: 0};
+const DEFAULT_INTERVAL = { min: 0, sec: 0};
 
 const styles = {
   intervals: {
@@ -46,8 +46,8 @@ const Timer = ({classes}) => {
           id: "restInterval",
           minutes: restInterval['min'],
           seconds: restInterval['sec'],
-          onMinuteChange: onTimeChange(restInterval, setRestInterval, 'min' ),
-          onSecondChange: onTimeChange(restInterval, setRestInterval, 'sec' ),
+          onMinuteChange: onTimeChange(restInterval, setRestInterval, 'min'),
+          onSecondChange: onTimeChange(restInterval, setRestInterval, 'sec'),
           onMinuteBlur: onBlur(restInterval, setRestInterval, 'min'),
           onSecondBlur: onBlur(restInterval, setRestInterval, 'sec')
         }}/>
@@ -55,13 +55,13 @@ const Timer = ({classes}) => {
       <div className={classes.intervals}>
         <h2>Work:</h2>
         <TimeInterval {...{
-          id: "restInterval",
+          id: "workInterval",
           minutes: workInterval['min'],
           seconds: workInterval['sec'],
           onMinuteChange: onTimeChange(workInterval, setWorkInterval, 'min' ),
           onSecondChange: onTimeChange(workInterval, setWorkInterval, 'sec' ),
-          onMinuteBlur: onBlur(restInterval, setWorkInterval, 'min'),
-          onSecondBlur: onBlur(restInterval, setWorkInterval, 'sec')
+          onMinuteBlur: onBlur(workInterval, setWorkInterval, 'min'),
+          onSecondBlur: onBlur(workInterval, setWorkInterval, 'sec')
         }}/>
       </div>
       <div>
@@ -80,7 +80,7 @@ const Timer = ({classes}) => {
         }}/> : ''}
       </div>
       <button onClick={() => {setStartTimer(!startTimer)}}>
-        {startTimer ? 'Start' : 'Stop'}
+        {startTimer ? 'Stop' : 'Start'}
       </button>
     </div>
   )

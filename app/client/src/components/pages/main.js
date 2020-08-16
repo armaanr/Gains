@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import WorkoutList from '../workoutList';
 import Timer from '../timer';
 
-
 const styles = {
   root: {
     width: '100%',
