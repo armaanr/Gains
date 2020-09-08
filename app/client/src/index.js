@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import {ApolloProvider, ApolloClient, HttpLink} from '@apollo/client';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
+import { cache } from './cache';
 
-const cache = new InMemoryCache();
 const client = new ApolloClient({
     cache,
     link: new HttpLink({
@@ -14,14 +14,13 @@ const client = new ApolloClient({
     })
 });
 
-
 ReactDOM.render(
     <ApolloProvider client={client}>
-      <Router>
-        <App/>
-      </Router>
+        <Router>
+            <App/>
+        </Router>
     </ApolloProvider>,
-  document.getElementById('root')
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
